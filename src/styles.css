@@ -139,6 +139,13 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+@theme inline {
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -147,5 +154,50 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-body);
+    background-image:
+      radial-gradient(var(--ink) 0.6px, transparent 0.6px);
+    background-size: 14px 14px;
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
   }
 }
+
+@utility panel {
+  border: 2px solid var(--ink);
+  background-color: var(--card);
+  box-shadow: var(--shadow-panel-sm);
+}
+
+@utility panel-lg {
+  border: 3px solid var(--ink);
+  background-color: var(--card);
+  box-shadow: var(--shadow-panel);
+}
+
+@utility ink-btn {
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-panel-sm);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+@utility ink-btn-active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+@utility story-text {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 2.1;
+  white-space: pre-wrap;
+}
+
