@@ -14,7 +14,139 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      stories: {
+        Row: {
+          created_at: string
+          id: string
+          latest_part: number
+          notes: string | null
+          summary: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          latest_part?: number
+          notes?: string | null
+          summary: string
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          latest_part?: number
+          notes?: string | null
+          summary?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      story_parts: {
+        Row: {
+          created_at: string
+          error: string | null
+          id: string
+          part_number: number
+          plan: Json | null
+          status: string
+          story_id: string
+          target_words: number
+          title: string
+          updated_at: string
+          word_count: number
+        }
+        Insert: {
+          created_at?: string
+          error?: string | null
+          id?: string
+          part_number: number
+          plan?: Json | null
+          status?: string
+          story_id: string
+          target_words?: number
+          title?: string
+          updated_at?: string
+          word_count?: number
+        }
+        Update: {
+          created_at?: string
+          error?: string | null
+          id?: string
+          part_number?: number
+          plan?: Json | null
+          status?: string
+          story_id?: string
+          target_words?: number
+          title?: string
+          updated_at?: string
+          word_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "story_parts_story_id_fkey"
+            columns: ["story_id"]
+            isOneToOne: false
+            referencedRelation: "stories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      story_scenes: {
+        Row: {
+          attempts: number
+          brief: string
+          chapter_no: number
+          chapter_title: string
+          claimed_at: string | null
+          content: string | null
+          created_at: string
+          id: string
+          idx: number
+          part_id: string
+          status: string
+          word_count: number
+        }
+        Insert: {
+          attempts?: number
+          brief?: string
+          chapter_no?: number
+          chapter_title?: string
+          claimed_at?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          idx: number
+          part_id: string
+          status?: string
+          word_count?: number
+        }
+        Update: {
+          attempts?: number
+          brief?: string
+          chapter_no?: number
+          chapter_title?: string
+          claimed_at?: string | null
+          content?: string | null
+          created_at?: string
+          id?: string
+          idx?: number
+          part_id?: string
+          status?: string
+          word_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "story_scenes_part_id_fkey"
+            columns: ["part_id"]
+            isOneToOne: false
+            referencedRelation: "story_parts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
