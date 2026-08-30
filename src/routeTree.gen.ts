@@ -10,33 +10,89 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicLibraryRouteImport } from './routes/api/public/library'
+import { Route as ApiPublicDownloadPartIdRouteImport } from './routes/api/public/download.$partId'
+import { Route as ApiPublicStoriesIdRouteImport } from './routes/api/public/stories.$id'
+import { Route as ApiPublicWorkerTickRouteImport } from './routes/api/public/worker/tick'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicLibraryRoute = ApiPublicLibraryRouteImport.update({
+  id: '/api/public/library',
+  path: '/api/public/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicDownloadPartIdRoute = ApiPublicDownloadPartIdRouteImport.update({
+  id: '/api/public/download/$partId',
+  path: '/api/public/download/$partId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicStoriesIdRoute = ApiPublicStoriesIdRouteImport.update({
+  id: '/api/public/stories/$id',
+  path: '/api/public/stories/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicWorkerTickRoute = ApiPublicWorkerTickRouteImport.update({
+  id: '/api/public/worker/tick',
+  path: '/api/public/worker/tick',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/library': typeof ApiPublicLibraryRoute
+  '/api/public/download/$partId': typeof ApiPublicDownloadPartIdRoute
+  '/api/public/stories/$id': typeof ApiPublicStoriesIdRoute
+  '/api/public/worker/tick': typeof ApiPublicWorkerTickRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/library': typeof ApiPublicLibraryRoute
+  '/api/public/download/$partId': typeof ApiPublicDownloadPartIdRoute
+  '/api/public/stories/$id': typeof ApiPublicStoriesIdRoute
+  '/api/public/worker/tick': typeof ApiPublicWorkerTickRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/library': typeof ApiPublicLibraryRoute
+  '/api/public/download/$partId': typeof ApiPublicDownloadPartIdRoute
+  '/api/public/stories/$id': typeof ApiPublicStoriesIdRoute
+  '/api/public/worker/tick': typeof ApiPublicWorkerTickRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/api/public/library'
+    | '/api/public/download/$partId'
+    | '/api/public/stories/$id'
+    | '/api/public/worker/tick'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/api/public/library'
+    | '/api/public/download/$partId'
+    | '/api/public/stories/$id'
+    | '/api/public/worker/tick'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/public/library'
+    | '/api/public/download/$partId'
+    | '/api/public/stories/$id'
+    | '/api/public/worker/tick'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicLibraryRoute: typeof ApiPublicLibraryRoute
+  ApiPublicDownloadPartIdRoute: typeof ApiPublicDownloadPartIdRoute
+  ApiPublicStoriesIdRoute: typeof ApiPublicStoriesIdRoute
+  ApiPublicWorkerTickRoute: typeof ApiPublicWorkerTickRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +104,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/library': {
+      id: '/api/public/library'
+      path: '/api/public/library'
+      fullPath: '/api/public/library'
+      preLoaderRoute: typeof ApiPublicLibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/download/$partId': {
+      id: '/api/public/download/$partId'
+      path: '/api/public/download/$partId'
+      fullPath: '/api/public/download/$partId'
+      preLoaderRoute: typeof ApiPublicDownloadPartIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/stories/$id': {
+      id: '/api/public/stories/$id'
+      path: '/api/public/stories/$id'
+      fullPath: '/api/public/stories/$id'
+      preLoaderRoute: typeof ApiPublicStoriesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/worker/tick': {
+      id: '/api/public/worker/tick'
+      path: '/api/public/worker/tick'
+      fullPath: '/api/public/worker/tick'
+      preLoaderRoute: typeof ApiPublicWorkerTickRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicLibraryRoute: ApiPublicLibraryRoute,
+  ApiPublicDownloadPartIdRoute: ApiPublicDownloadPartIdRoute,
+  ApiPublicStoriesIdRoute: ApiPublicStoriesIdRoute,
+  ApiPublicWorkerTickRoute: ApiPublicWorkerTickRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
